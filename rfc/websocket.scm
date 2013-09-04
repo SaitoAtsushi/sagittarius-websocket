@@ -84,7 +84,7 @@
       v))
 
   (define (get-u64 port :optional (endian (endianness big)))
-    (rlet1 v (make-bytevector 8)
+    (let1 v (make-bytevector 8)
       (get-bytevector-n! port v 0 8)
       (bytevector-u64-ref v 0 endian)))
 
