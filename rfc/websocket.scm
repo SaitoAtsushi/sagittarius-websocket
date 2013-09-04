@@ -80,8 +80,7 @@
   (define (get-u16 port :optional (endian (endianness big)))
     (let1 v (make-bytevector 2)
       (get-bytevector-n! port v 0 2)
-      (bytevector-u16-ref v 0 endian)
-      v))
+      (bytevector-u16-ref v 0 endian)))
 
   (define (get-u64 port :optional (endian (endianness big)))
     (let1 v (make-bytevector 8)
