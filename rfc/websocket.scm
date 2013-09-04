@@ -124,7 +124,7 @@
 
   (define (handshaked? self)
     (unless (eq? 'open (slot-ref self 'status))
-      (error "websocket hasn't handshake yet.")))
+      (error 'handshaked? "websocket hasn't handshake yet.")))
 
   (define (websocket-wait-close self)
     (thread-join! (slot-ref self 'receiver)))
