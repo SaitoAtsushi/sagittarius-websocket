@@ -132,7 +132,7 @@
   (define (scheme->default-port scheme)
     (cond ((string=? scheme "ws") "80")
           ((string=? scheme "wss") "443")
-          (else (error "unsupported scheme:" scheme))))
+          (else (error 'scheme->default-port "unsupported scheme:" scheme))))
 
   (define (url-split url)
     (receive (scheme user host port path query fragment)
@@ -213,13 +213,13 @@
             (unless (string-ci=? r origin)
               (slot-set! self 'status 'closed)
               (slot-set! self 'socket #f)
-              (error "origin doesn't match:" r)))
+              (error 'websocket-connect "origin doesn't match:" r)))
           (if-let1 r (assoc-ref header "Sec-WebSocket-Accept" #f string-ci=?)
             (string-ci=? r (accept-key key))
             (begin
               (slot-set! self 'status 'closed)
               (slot-set! self 'socket #f)
-              (error "security digest doesn't match:" r)))
+              (error 'websocket-connect "security digest doesn't match:" r)))
           (slot-set! self 'socket sock)
           (slot-set! self 'in in)
           (slot-set! self 'out out)
@@ -272,7 +272,7 @@
             ((<= #x10000 num #x4000000000000000)
              (put-u8 port (fxior 127 maskbit))
              (put-u64 port num))
-            (else (error "Payload is too large")))
+            (else (error 'write-payload-length "Payload is too large")))
       (when mask (put-bytevector port mask))
       (flush-output-port port)))
 
