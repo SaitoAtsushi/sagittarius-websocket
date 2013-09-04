@@ -380,8 +380,8 @@
            (mask-flag (not (zero? (fxand #x80 b2))))
            (plength (fxand #x7f b2)))
       (let* ((plength (case plength
-                        ((126) (get-u16 in))
-                        ((127) (get-u64 in))
+                        ((126) (get-u16 port))
+                        ((127) (get-u64 port))
                         (else plength)))
              (payload (make-bytevector plength)))
         (if mask-flag
