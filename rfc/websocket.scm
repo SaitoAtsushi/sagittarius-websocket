@@ -377,7 +377,8 @@
       (else "unknown opcode")))
 
   (define (websocket-receive self)
-    (unless (handshaked? self)
+    (unless (or (eq? 'open (slot-ref self 'status))
+                (eq? 'closing (slot-ref self 'status)))
       (error 'websocket-receive "websocket hasn't handshake yet."))
     (let* ((port (slot-ref self 'in))
            (b1 (get-u8 port))
