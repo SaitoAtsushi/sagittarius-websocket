@@ -1,12 +1,13 @@
 
 (import (rfc websocket)
         (sagittarius threads)
+        (rnrs exceptions (6))
         (rnrs))
 
 (define websocket
   (make-websocket-client
    :on-message (lambda(x) (display "response: ") (display x) (newline))
-   :on-error (lambda()(error 'websocket "websocket error."))))
+   :on-error raise))
 
 (websocket-connect websocket "wss://echo.websocket.org")
 (websocket-send websocket "Hello, world.\n")
