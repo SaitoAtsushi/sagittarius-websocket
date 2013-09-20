@@ -1,7 +1,5 @@
 
 (import (rfc websocket)
-        (sagittarius threads)
-        (rnrs exceptions (6))
         (rnrs))
 
 (define websocket
