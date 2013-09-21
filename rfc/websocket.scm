@@ -26,16 +26,6 @@
           (srfi :18 multithreading)
           (clos user))
 
-  (define-syntax debug
-    (syntax-rules ()
-      ((_ expr)
-       (call-with-values (lambda()expr)
-         (lambda args
-           (display "debug: " (current-error-port))
-           (write args (current-error-port))
-           (newline (current-error-port))
-           (apply values args))))))
-
   (define-syntax if-let1
     (syntax-rules ()
       ((_ var expr act alt)
