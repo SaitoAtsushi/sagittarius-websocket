@@ -4,7 +4,6 @@
           websocket-wait-close
           websocket-connect
           websocket-close
-          websocket-send
           websocket-ping
           websocket-send-bytevector
           websocket-send-string
