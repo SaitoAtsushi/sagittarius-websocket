@@ -252,7 +252,7 @@
              (put-u8 port (fxior num maskbit)))
             ((<= 126 num #x8000)
              (put-u8 port (fxior 126 maskbit))
-             (put-u16 port num))
+             (put-u16 port num (endianness big)))
             ((<= #x10000 num #x4000000000000000)
              (put-u8 port (fxior 127 maskbit))
              (put-u64 port num))
@@ -367,7 +367,7 @@
            (mask-flag (not (zero? (fxand #x80 b2))))
            (plength (fxand #x7f b2)))
       (let* ((plength (case plength
-                        ((126) (get-u16 port))
+                        ((126) (get-u16 port (endianness big)))
                         ((127) (get-u64 port))
                         (else plength)))
              (payload (make-bytevector plength)))
