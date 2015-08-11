@@ -56,20 +56,10 @@
       (cdr r)
       default))
 
-  (define (put-u16 port num :optional (endian (endianness big)))
-    (rlet1 v (make-bytevector 2)
-      (bytevector-u16-set! v 0 num endian)
-      (put-bytevector port v)))
-
   (define (put-u64 port num :optional (endian (endianness big)))
     (rlet1 v (make-bytevector 8)
       (bytevector-u64-set! v 0 num endian)
       (put-bytevector port v)))
-
-  (define (get-u16 port :optional (endian (endianness big)))
-    (let1 v (make-bytevector 2)
-      (get-bytevector-n! port v 0 2)
-      (bytevector-u16-ref v 0 endian)))
 
   (define (get-u64 port :optional (endian (endianness big)))
     (let1 v (make-bytevector 8)
